@@ -1,5 +1,7 @@
 package insper.store.instituicao;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,12 @@ public class InstituicaoService {
         return instituicaoRepository.findById(id).map(InstituicaoModel::to).orElse(null);
     }
 
-    public Instituicao[] readAll() {
+    public List<Instituicao> readAll() {
         Iterable<InstituicaoModel> allInstituicoes = instituicaoRepository.findAll();
         return StreamSupport.stream(allInstituicoes.spliterator(), false)
                             .map(InstituicaoModel::to)
-                            .toArray(Instituicao[]::new);
+                            .collect(Collectors.toList());
     }
+    
     
 }

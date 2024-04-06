@@ -1,6 +1,11 @@
 package insper.store.instituicao;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,23 +59,21 @@ public class InstituicaoResource implements InstituicaoController {
 
     @Override
     public ResponseEntity<InstituicaoOut> read(String id) {
-        final InstituicaoOut instituicao = InstituicaoOut.builder()
-            .id(id)
-            .build();
-        return ResponseEntity.ok(instituicao);
+        final Instituicao instituicao = instituicaoService.read(id);
+        if (instituicao == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(InstituicaoParser.to(instituicao));
     }
 
     @Override
-    public ResponseEntity<InstituicaoOut[]> readAll() {
-        final InstituicaoOut[] instituicoes = new InstituicaoOut[] {
-            InstituicaoOut.builder()
-                .id("1")
-                .build(),
-            InstituicaoOut.builder()
-                .id("2")
-                .build()
-        };
-        return ResponseEntity.ok(instituicoes);
+    public ResponseEntity<List<InstituicaoOut>> readAll() {
+        List<Instituicao> instituicoes = instituicaoService.readAll(); // Agora recebe uma lista
+        List<InstituicaoOut> instituicoesOut = instituicoes.stream()
+                                                           .map(InstituicaoParser::to)
+                                                           .collect(Collectors.toList());
+        return ResponseEntity.ok(instituicoesOut);
     }
+    
     
 }
