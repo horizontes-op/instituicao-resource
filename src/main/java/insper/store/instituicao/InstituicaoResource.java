@@ -50,26 +50,18 @@ public class InstituicaoResource implements InstituicaoController {
         // insert using service
         instituicao = instituicaoService.create(instituicao);
         return ResponseEntity.ok(InstituicaoParser.to(instituicao));
-        // return ResponseEntity.created(
-        //     ServletUriComponentsBuilder
-        //         .fromCurrentRequest()
-        //         .path("/{id}")
-        //         .buildAndExpand(instituicao.id())
-        //         .toUri())
-        //     .body(AlunoParser.to(instituicao)
-        //     );
     }
 
     @Override
-    public ResponseEntity<InstituicaoOut> read(String idUser) {
+    public ResponseEntity<InstituicaoOut> read(String id) {
         final InstituicaoOut instituicao = InstituicaoOut.builder()
-            .id(idUser)
+            .id(id)
             .build();
         return ResponseEntity.ok(instituicao);
     }
 
     @Override
-    public ResponseEntity<InstituicaoOut[]> readAll(String token) {
+    public ResponseEntity<InstituicaoOut[]> readAll() {
         final InstituicaoOut[] instituicoes = new InstituicaoOut[] {
             InstituicaoOut.builder()
                 .id("1")
