@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import insper.store.instituicao.ExceptionCustomized.UnauthorizedException;
+
 @RestController
 public class InstituicaoResource implements InstituicaoController {
 
@@ -49,7 +51,10 @@ public class InstituicaoResource implements InstituicaoController {
     }
 
     @Override
-    public ResponseEntity<InstituicaoOut> create(InstituicaoIn in) {
+    public ResponseEntity<InstituicaoOut> create(InstituicaoIn in, String roleUser) {
+        if (!roleUser.equals("admin")) {
+            throw new UnauthorizedException("User without permission");
+        }
         // parser
         Instituicao instituicao = InstituicaoParser.to(in);
         // insert using service
