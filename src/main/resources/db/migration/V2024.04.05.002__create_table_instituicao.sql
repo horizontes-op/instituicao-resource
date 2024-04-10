@@ -1,5 +1,5 @@
 
-CREATE TABLE if not exists instituicao (
+CREATE TABLE  instituicao (
     id_instituicao VARCHAR(36) PRIMARY KEY,
     tx_nome VARCHAR(255) NOT NULL,
     tx_area_atuacao VARCHAR(255),
@@ -19,6 +19,6 @@ CREATE TABLE if not exists instituicao (
     tx_descricao VARCHAR(255) NOT NULL,
     tx_misssao VARCHAR(255),
     tx_visao VARCHAR(255),
-    tx_valores VARCHAR(255),
+    tx_valores VARCHAR(255)
 
 );

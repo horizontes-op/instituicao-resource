@@ -66,6 +66,9 @@ public class InstituicaoResource implements InstituicaoController {
         return ResponseEntity.ok(InstituicaoParser.to(instituicao));
     }
 
+
+
+    
     @Override
     public ResponseEntity<List<InstituicaoOut>> readAll() {
         List<Instituicao> instituicoes = instituicaoService.readAll(); // Agora recebe uma lista
