@@ -7,6 +7,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.NonNull;
 
 @Service
@@ -30,5 +31,14 @@ public class InstituicaoService {
                             .collect(Collectors.toList());
     }
     
+    public Instituicao getByNome(@NonNull String nome) {
+        // return the element with the given name or null if it does not exist
+          InstituicaoModel instituicaoModel = instituicaoRepository.findByNome(nome);
+        if (instituicaoModel == null) {
+            // Handle the case where no institution is found, e.g., throw a custom exception or return null
+            return null;
+        }
+        return instituicaoModel.to();
+    }
     
 }

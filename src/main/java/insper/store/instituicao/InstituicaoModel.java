@@ -1,5 +1,7 @@
 package insper.store.instituicao;
 
+import java.util.Optional;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -123,4 +125,7 @@ public class InstituicaoModel {
             .build();
     }
 
+    public Optional<InstituicaoModel> map(Object object) {
+        return Optional.ofNullable((InstituicaoModel) object);
+    }
 }

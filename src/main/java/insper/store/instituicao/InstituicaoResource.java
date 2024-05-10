@@ -70,9 +70,6 @@ public class InstituicaoResource implements InstituicaoController {
         }
         return ResponseEntity.ok(InstituicaoParser.to(instituicao));
     }
-
-
-
     
     @Override
     public ResponseEntity<List<InstituicaoOut>> readAll() {
@@ -84,4 +81,13 @@ public class InstituicaoResource implements InstituicaoController {
     }
     
     
+    @Override
+    public ResponseEntity<InstituicaoOut> getByNome(String nome) {
+        // return null;
+        final Instituicao instituicao = instituicaoService.getByNome(nome);
+        if (instituicao == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(InstituicaoParser.to(instituicao));
+    }
 }
