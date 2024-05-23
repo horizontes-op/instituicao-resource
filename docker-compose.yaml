@@ -1,0 +1,38 @@
+version: '3.8'
+name: instituicao_localhost
+services:
+
+  db-local:
+    container_name: local-db-local
+    image: postgres:latest
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=local
+      - POSTGRES_PASSWORD=local
+      - POSTGRES_DB=local
+    volumes:
+      - $VOLUME/postgres/local/data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - private-network
+
+  instituicao:
+    build:
+      context: ../instituicao-resource/
+      dockerfile: Dockerfile
+    image: local-instituicao:latest
+    ports:
+      - 8083:8080
+    environment:
+      - spring.datasource.url=jdbc:postgresql://local-db-local:5432/local
+      - spring.datasource.username=local
+      - spring.datasource.password=local
+    networks:
+      - private-network
+    depends_on:
+      - db-local
+
+networks:
+  private-network:
+    driver: bridge

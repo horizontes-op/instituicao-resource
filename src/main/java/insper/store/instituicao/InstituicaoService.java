@@ -1,6 +1,7 @@
 package insper.store.instituicao;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -32,13 +33,14 @@ public class InstituicaoService {
     }
     
     public Instituicao getByNome(@NonNull String nome) {
-        // return the element with the given name or null if it does not exist
-          InstituicaoModel instituicaoModel = instituicaoRepository.findByNome(nome);
-        if (instituicaoModel == null) {
+        Optional<InstituicaoModel> instituicaoModel = instituicaoRepository.findByNome(nome);
+
+        if (instituicaoModel.isEmpty()) {
             // Handle the case where no institution is found, e.g., throw a custom exception or return null
             return null;
         }
-        return instituicaoModel.to();
+
+        return instituicaoModel.get().to();
     }
     
 }

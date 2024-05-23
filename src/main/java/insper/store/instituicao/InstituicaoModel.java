@@ -125,7 +125,4 @@ public class InstituicaoModel {
             .build();
     }
 
-    public Optional<InstituicaoModel> map(Object object) {
-        return Optional.ofNullable((InstituicaoModel) object);
-    }
 }

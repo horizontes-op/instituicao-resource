@@ -51,10 +51,12 @@ public class InstituicaoResource implements InstituicaoController {
     }
 
     @Override
-    public ResponseEntity<InstituicaoOut> create(InstituicaoIn in, String roleUser) {
-        if (!roleUser.equals("admin")) {
-            throw new UnauthorizedException("User without permission");
-        }
+    // public ResponseEntity<InstituicaoOut> create(InstituicaoIn in, String roleUser) {
+    public ResponseEntity<InstituicaoOut> create(InstituicaoIn in) {
+    
+        // if (!roleUser.equals("admin")) {
+        //     throw new UnauthorizedException("User without permission");
+        // }
         // parser
         Instituicao instituicao = InstituicaoParser.to(in);
         // insert using service
@@ -82,9 +84,9 @@ public class InstituicaoResource implements InstituicaoController {
     
     
     @Override
-    public ResponseEntity<InstituicaoOut> getByNome(String nome) {
+    public ResponseEntity<InstituicaoOut> getByNome(InstituicaoBuscaNome in) {
         // return null;
-        final Instituicao instituicao = instituicaoService.getByNome(nome);
+        final Instituicao instituicao = instituicaoService.getByNome(in.nome());
         if (instituicao == null) {
             return ResponseEntity.notFound().build();
         }
