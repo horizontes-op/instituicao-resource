@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.NonNull;
 
 @Service
@@ -21,10 +21,12 @@ public class InstituicaoService {
         return instituicaoRepository.save(new InstituicaoModel(in)).to();
     }
 
+    @Cacheable(value = "instituicao", key = "#id")
     public Instituicao read(@NonNull String id) {
         return instituicaoRepository.findById(id).map(InstituicaoModel::to).orElse(null);
     }
 
+    @Cacheable(value = "instituicao", key = "'ALLinstituicoes'")
     public List<Instituicao> readAll() {
         Iterable<InstituicaoModel> allInstituicoes = instituicaoRepository.findAll();
         return StreamSupport.stream(allInstituicoes.spliterator(), false)
@@ -32,6 +34,7 @@ public class InstituicaoService {
                             .collect(Collectors.toList());
     }
     
+    @Cacheable(value = "instituicao", key = "#nome")
     public Instituicao getByNome(@NonNull String nome) {
         Optional<InstituicaoModel> instituicaoModel = instituicaoRepository.findByNome(nome);
 

@@ -1,4 +1,6 @@
 package insper.store.instituicao;
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +11,7 @@ import lombok.experimental.Accessors;
 @Builder
 @Getter @Setter @Accessors(fluent = true, chain = true)
 @AllArgsConstructor @NoArgsConstructor
-public class Instituicao {
+public class Instituicao implements Serializable {
     // dados gerais
     private String id;
     private String nome;
