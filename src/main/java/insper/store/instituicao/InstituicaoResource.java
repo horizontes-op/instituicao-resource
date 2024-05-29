@@ -74,7 +74,14 @@ public class InstituicaoResource implements InstituicaoController {
     }
     
     @Override
-    public ResponseEntity<List<InstituicaoOut>> readAll() {
+    public ResponseEntity<List<InstituicaoOut>> readAll(String nome) {
+        if (nome != null) {
+            Instituicao instituicao = instituicaoService.getByNome(nome);
+            if (instituicao == null) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(List.of(InstituicaoParser.to(instituicao)));
+        }
         List<Instituicao> instituicoes = instituicaoService.readAll(); // Agora recebe uma lista
         List<InstituicaoOut> instituicoesOut = instituicoes.stream()
                                                            .map(InstituicaoParser::to)
@@ -83,13 +90,13 @@ public class InstituicaoResource implements InstituicaoController {
     }
     
     
-    @Override
-    public ResponseEntity<InstituicaoOut> getByNome(InstituicaoBuscaNome in) {
-        // return null;
-        final Instituicao instituicao = instituicaoService.getByNome(in.nome());
-        if (instituicao == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(InstituicaoParser.to(instituicao));
-    }
+    // @Override
+    // public ResponseEntity<InstituicaoOut> getByNome(InstituicaoBuscaNome in) {
+    //     // return null;
+    //     final Instituicao instituicao = instituicaoService.getByNome(in.nome());
+    //     if (instituicao == null) {
+    //         return ResponseEntity.notFound().build();
+    //     }
+    //     return ResponseEntity.ok(InstituicaoParser.to(instituicao));
+    // }
 }
