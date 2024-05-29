@@ -1,3 +1,5 @@
+.env
+volume
 # Compiled class file
 *.class
 
