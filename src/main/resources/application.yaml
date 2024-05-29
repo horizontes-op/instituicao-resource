@@ -2,9 +2,9 @@ spring:
   application:
     name: store-instituicao
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/store}
-    username: ${DATABASE_USERNAME:store}
-    password: ${DATABASE_PASSWORD:store}
+    url: jdbc:postgresql://store-db-store:5432/store
+    username: store
+    password: store
     driver-class-name: org.postgresql.Driver
   flyway:
     baseline-on-migrate: true
@@ -13,6 +13,11 @@ spring:
     properties:
       hibernate:
         default_schema: instituicao
+  cache: 
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
 management:
   endpoints:
@@ -26,7 +31,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+      defaultZone: http://store-discovery:8761/eureka/
 
 springdoc:
   api-docs:

@@ -31,11 +31,11 @@
 			<artifactId>flyway-core</artifactId>
 		</dependency>
 		
-		<!-- <dependency>
+		<dependency>
 			<groupId>insper.store</groupId>
 			<artifactId>account</artifactId>
 			<version>${project.version}</version>
-		</dependency> -->
+		</dependency>
 
 		<dependency>
 			<groupId>insper.store</groupId>
@@ -43,6 +43,21 @@
 			<version>${project.version}</version>
 		</dependency> 
 
+		<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+			<version>3.1.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -61,10 +76,10 @@
 		</dependency>
 
 		<!-- permite o registro em um servico de discovery -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency> -->
+		</dependency>
 
 		<!-- habilitar para fazer uso de outros microsservicos -->
 		<dependency>

@@ -1,9 +1,11 @@
 package insper.store.instituicao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
 @Repository
-public interface InstituicaoRepository extends CrudRepository<InstituicaoModel, String> {
-    InstituicaoModel findByNome(String nome);
+public interface InstituicaoRepository extends JpaRepository<InstituicaoModel, String> {
+
+    Optional<InstituicaoModel> findByNome(String nome);
 }
